@@ -2,7 +2,7 @@
 
 ## Compatibility
 
-This application targets Android (4.4) Nougat and newer.
+This application targets Android (4.4) KitKat and newer.
 
 ## Project Modules
 
