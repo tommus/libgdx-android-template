@@ -1,0 +1,74 @@
+//region Dependencies
+
+def deps = [:]
+ext.deps = deps
+
+def versions = [:]
+versions.android_gradle_plugin = "4.0.0"
+versions.kotlin = "1.3.72"
+versions.libgdx = "1.9.10"
+versions.libktx = "1.9.10-b6"
+deps.versions = versions
+
+//endregion
+
+//region Build
+
+def build = [:]
+build.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+build.kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.build = build
+
+def build_versions = [:]
+build_versions.compile_sdk = 29
+build_versions.min_sdk = 19
+build_versions.target_sdk = 29
+deps.build_versions = build_versions
+
+//endregion
+
+//region Gdx
+
+def gdx = [:]
+gdx.backend_android = "com.badlogicgames.gdx:gdx-backend-android:$versions.libgdx"
+gdx.engine = "com.badlogicgames.gdx:gdx:$versions.libgdx"
+gdx.platform_arm64_v8a = "com.badlogicgames.gdx:gdx-platform:$versions.libgdx:natives-arm64-v8a"
+gdx.platform_armeabi = "com.badlogicgames.gdx:gdx-platform:$versions.libgdx:natives-armeabi"
+gdx.platform_armeabi_v7a = "com.badlogicgames.gdx:gdx-platform:$versions.libgdx:natives-armeabi-v7a"
+gdx.platform_x86 = "com.badlogicgames.gdx:gdx-platform:$versions.libgdx:natives-x86"
+gdx.platform_x86_64 = "com.badlogicgames.gdx:gdx-platform:$versions.libgdx:natives-x86_64"
+deps.gdx = gdx
+
+//endregion
+
+//region Kotlin
+
+def kotlin = [:]
+kotlin.stdlib_jdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+deps.kotlin = kotlin
+
+//endregion
+
+//region Ktx
+
+def ktx = [:]
+ktx.app = "io.github.libktx:ktx-app:$versions.libktx"
+ktx.assets = "io.github.libktx:ktx-assets:$versions.libktx"
+ktx.math = "io.github.libktx:ktx-math:$versions.libktx"
+deps.ktx = ktx
+
+//endregion
+
+//region Repositories
+
+static def addRepos(RepositoryHandler handler) {
+  handler.google()
+  handler.jcenter()
+  handler.mavenCentral()
+  handler.maven { url "https://jitpack.io" }
+  handler.maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
+ext.addRepos = this.&addRepos
+
+//endregion
